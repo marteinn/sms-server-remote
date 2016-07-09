@@ -73,3 +73,9 @@ BUG_REPORT_URL="http://bugs.launchpad.net/ubuntu/"]]></Body>
 - https://www.twilio.com/docs/quickstart/php/sms/hello-monkey
 - https://github.com/mauerbac/lambda-gateway-twilio-demo/blob/master/lambda_function.py
 - https://www.twilio.com/blog/2015/11/sending-selfies-without-servers-how-to-use-twilio-mms-amazon-lamba-and-amazons-gateway.html
+
+## Contributing
+Want to contribute? Awesome. Just send a pull request.
+
+## License
+sms-server-remote is released under the [MIT License](http://www.opensource.org/licenses/MIT).
