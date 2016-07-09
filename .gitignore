@@ -1,0 +1,20 @@
+# OSX
+.DS_Store
+
+# Python ignores
+*.pyc
+
+# Ignore virtualenv files
+venv
+
+# Logs
+*.log
+
+# Node+Npm
+node_modules
+
+# Temp
+/tmp
+
+# Settings
+*.env
