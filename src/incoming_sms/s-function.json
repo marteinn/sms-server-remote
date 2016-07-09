@@ -1,0 +1,64 @@
+{
+  "name": "incoming_sms",
+  "runtime": "python2.7",
+  "description": "Passes and runs fabric commands recived trough sms",
+  "customName": false,
+  "customRole": false,
+  "handler": "handler.handler",
+  "timeout": 60,
+  "memorySize": 1024,
+  "authorizer": {},
+  "custom": {
+    "excludePatterns": []
+  },
+  "endpoints": [
+    {
+      "path": "incoming_sms",
+      "method": "GET",
+      "type": "AWS",
+      "authorizationType": "none",
+      "authorizerFunction": false,
+      "apiKeyRequired": false,
+      "requestParameters": {
+        "integration.request.querystring.Body": "method.request.querystring.Body",
+        "integration.request.querystring.From": "method.request.querystring.From",
+        "integration.request.querystring.secret": "method.request.querystring.secret"
+      },
+      "requestTemplates": {
+        "application/json": {
+          "body": "$input.params('Body')",
+          "from":  "$input.params('From')",
+          "secret":  "$input.params('secret')"
+        }
+      },
+      "responses": {
+        "400": {
+          "statusCode": "400"
+        },
+        "default": {
+          "statusCode": "200",
+          "responseParameters": {},
+          "application/xml": "",
+          "responseModels": {
+            "application/xml": "Empty"
+          },
+          "responseTemplates": {
+            "application/xml": "$input.path('$')"
+          }
+        }
+      }
+    }
+  ],
+  "events": [],
+  "environment": {
+    "SERVERLESS_PROJECT": "${project}",
+    "SERVERLESS_STAGE": "${stage}",
+    "SERVERLESS_REGION": "${region}",
+    "ALLOWED_PHONE": "${allowedPhone}",
+    "SECRET_KEY": "${secretKey}"
+  },
+  "vpc": {
+    "securityGroupIds": [],
+    "subnetIds": []
+  }
+}

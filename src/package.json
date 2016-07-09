@@ -1,0 +1,12 @@
+{
+  "name": "sms-server-remote",
+  "version": "1.0.0",
+  "description": "",
+  "author": "marteinn",
+  "license": "MIT",
+  "private": false,
+  "scripts": {
+    "serverless": "../node_modules/serverless/bin/serverless"
+  },
+  "dependencies": {}
+}
