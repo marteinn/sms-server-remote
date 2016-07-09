@@ -1,11 +1,11 @@
 # SMS-Server-Remote
-This is a experiment based on Twilio and [Serverless](http://serverless.com) that lets you trigger fabric tasks on your server through SMS.
+This is a experiment based on [Twilio](https://twilio.com) and [Serverless](http://serverless.com) that lets you trigger fabric tasks on your server through SMS.
 
 ## Getting started
 - [Install serverless](: `npm install serverless -g`)
 - Setup project on AWS (just follow the serverless instructions)
 - Update dependencies: `make update_dependencies`
-- Write your own fabfile and server handling, store it in `src/incoming/sms/config`
+- Write your own fabfile and server handling, store it in `src/incoming/sms/config` (I have included a example for clarification)
 - Deploy the function and endpoint `incoming_sms`
 - Create a Twilio TwiML app that handles SMS messaging, use your lambda endpoint as request url with HTTP GET
 
@@ -18,12 +18,12 @@ This is a experiment based on Twilio and [Serverless](http://serverless.com) tha
     restarting apache..
     restart complete!
     ```
-- Please note that fabric taks that takes longer then 15 seconds are not sent back to Twilio (due to Twilio limitations)
+- _Please note: Fabric taks that takes longer then 15 seconds are not sent back to Twilio (due to Twilio timeout limitations)_
 
 ## Endpoints: incoming_sms
 The endpoint incoming_sms requires the following params:
 
-- `Body` (SMS message body delivered from Twilio) 
+- `Body` (SMS message body delivered from Twilio)
 - `From` (Phone number delivered from Twilio)
 - `secret` (A simple auth token)
 
