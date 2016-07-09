@@ -21,12 +21,14 @@
       "apiKeyRequired": false,
       "requestParameters": {
         "integration.request.querystring.Body": "method.request.querystring.Body",
-        "integration.request.querystring.From": "method.request.querystring.From"
+        "integration.request.querystring.From": "method.request.querystring.From",
+        "integration.request.querystring.secret": "method.request.querystring.secret"
       },
       "requestTemplates": {
         "application/json": {
           "body": "$input.params('Body')",
-          "from":  "$input.params('From')"
+          "from":  "$input.params('From')",
+          "secret":  "$input.params('secret')"
         }
       },
       "responses": {
@@ -51,7 +53,9 @@
   "environment": {
     "SERVERLESS_PROJECT": "${project}",
     "SERVERLESS_STAGE": "${stage}",
-    "SERVERLESS_REGION": "${region}"
+    "SERVERLESS_REGION": "${region}",
+    "ALLOWED_PHONE": "${allowedPhone}",
+    "SECRET_KEY": "${secretKey}"
   },
   "vpc": {
     "securityGroupIds": [],

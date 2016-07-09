@@ -23,11 +23,23 @@ logger.setLevel(logging.DEBUG)
 def handler(event, context):
     logger.debug("Received event {}".format(json.dumps(event)))
 
+    # Parse request vars
     cmd = event.get('body').lower()
     from_ = event.get('from')
+    request_secret = event.get('secret')
 
-    # if from_ != '':
-        # return _response("Error: Invalid phone number")
+    # Parse settings
+    secret_key = os.environ.get('SECRET_KEY')
+    allowed_phone = os.environ.get('ALLOWED_PHONE')
+    allowed_phone = allowed_phone.split(',')
+
+    # Validate secret
+    if request_secret != secret_key:
+        return _response('Error: Incorrect secret')
+
+    # Validate phone
+    if from_ not in allowed_phone:
+        return _response("Error: Invalid phone number")
 
     sys.stdout = StringIO()
 
@@ -36,6 +48,7 @@ def handler(event, context):
     except Exception:
         return _response('Error: Missing fabfile')
 
+    # Run fabric tasks
     tasks = cmd.split(' ')
     for task_name in tasks:
         try:
@@ -48,23 +61,26 @@ def handler(event, context):
     out = sys.stdout.getvalue()
     out = _format_out(out)
 
+    logger.debug("Fabric output {}".format(out))
+
+    # Close fabric connections
     fabric.network.disconnect_all()
 
     return _response(out)
 
 
 def _response(value):
-    template = ('<?xml version="1.0" encoding="UTF-8"?>'
-                '<Response>'
-                '<Message>'
-                '<Body><![CDATA[{}]]></Body>'
-                '</Message>'
-                '</Response>').format(value)
-
-    return template
+    '''Deliver twilio response'''
+    return ('<?xml version="1.0" encoding="UTF-8"?>'
+            '<Response>'
+            '<Message>'
+            '<Body><![CDATA[{}]]></Body>'
+            '</Message>'
+            '</Response>').format(value)
 
 
 def _format_out(value):
+    '''Clear fabric prefix ([...] run:) value from output'''
     lines = value.splitlines()
     formatted = []
     for line in lines:
