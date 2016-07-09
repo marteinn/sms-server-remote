@@ -4,6 +4,9 @@ This is a experiment based on Twilio and [Serverless](http://serverless.com) tha
 ## Getting started
 ...
 
+## Dependencies
+- https://github.com/Doerge/awslambda-pycrypto
+
 ### References
 - http://docs.serverless.com/docs/templates-variables
 - http://docs.aws.amazon.com/apigateway/latest/developerguide/api-gateway-mapping-template-reference.html

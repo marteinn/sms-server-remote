@@ -1,11 +1,11 @@
 {
   "name": "incoming_sms",
   "runtime": "python2.7",
-  "description": "Serverless Lambda function for project: sms-server-remote",
+  "description": "Passes and runs fabric commands recived trough sms",
   "customName": false,
   "customRole": false,
   "handler": "handler.handler",
-  "timeout": 6,
+  "timeout": 60,
   "memorySize": 1024,
   "authorizer": {},
   "custom": {
@@ -19,9 +19,15 @@
       "authorizationType": "none",
       "authorizerFunction": false,
       "apiKeyRequired": false,
-      "requestParameters": {},
+      "requestParameters": {
+        "integration.request.querystring.Body": "method.request.querystring.Body",
+        "integration.request.querystring.From": "method.request.querystring.From"
+      },
       "requestTemplates": {
-        "application/json": ""
+        "application/json": {
+          "body": "$input.params('Body')",
+          "from":  "$input.params('From')"
+        }
       },
       "responses": {
         "400": {
@@ -30,11 +36,12 @@
         "default": {
           "statusCode": "200",
           "responseParameters": {},
+          "application/xml": "",
           "responseModels": {
-            "application/json;charset=UTF-8": "Empty"
+            "application/xml": "Empty"
           },
           "responseTemplates": {
-            "application/json;charset=UTF-8": ""
+            "application/xml": "$input.path('$')"
           }
         }
       }
