@@ -55,6 +55,17 @@ BUG_REPORT_URL="http://bugs.launchpad.net/ubuntu/"]]></Body>
   </Message>
 </Response>
 ```
+## Git hooks
+
+### Bump version
+
+These hooks will automatically bump the application version when using `git flow release ...`
+
+```
+chmod +x $PWD/git-hooks/bump-version.sh
+ln -nfs $PWD/git-hooks/bump-version.sh .git/hooks/post-flow-release-start
+ln -nfs $PWD/git-hooks/bump-version.sh .git/hooks/post-flow-hotfix-start
+```
 
 ## Commands
 - Deploy function: `npm run serverless function deploy -a`
