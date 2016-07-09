@@ -1,16 +1,12 @@
 {
   "name": "sms-server-remote",
-  "version": "0.0.1",
-  "description": "A Serverless Project and its Serverless Plugin dependencies.",
-  "author": "me",
+  "version": "1.0.0",
+  "description": "",
+  "author": "marteinn",
   "license": "MIT",
   "private": false,
   "scripts": {
     "serverless": "../node_modules/serverless/bin/serverless"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git://github.com/"
   },
   "dependencies": {}
 }

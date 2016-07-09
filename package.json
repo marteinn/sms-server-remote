@@ -10,6 +10,10 @@
   "devDependencies": {
     "serverless": "^0.5.6"
   },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/marteinn/sms-server-remote"
+  },
   "author": "Martin Sandström <martin@marteinn.se> (http://marteinn.se)",
-  "license": "ISC"
+  "license": "MIT"
 }
